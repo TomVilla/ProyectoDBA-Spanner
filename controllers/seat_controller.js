@@ -16,6 +16,18 @@ class SeatController{
         }
     }
 
+    async getSeatsByFlight(id){
+        const query = {
+            sql: `SELECT * FROM seat WHERE flightid = ${id}`,
+        };
+        try {
+            const [rows] = await spanner.run(query);
+            return rows;
+        } catch (err) {
+            console.error('ERROR:', err);
+        }
+    }
+
     async getSeat(id){
         const query = {
             sql: `SELECT * FROM seat WHERE seatid = ${id}`,

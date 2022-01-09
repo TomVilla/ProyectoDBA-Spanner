@@ -67,7 +67,7 @@ function randomSeat(maximo){
   {
     data.push({
       seatid: String(i+1),
-      seatnumber: String(randomNumber(1,100)),
+      seatnumber: String(randomNumber(1,10)),
       seatcost: Spanner.float(parseFloat(randomFloat(600,1000).toFixed(2))),
       flightid: String(randomNumber(1,1000)),
     });

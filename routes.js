@@ -226,7 +226,7 @@ function AerolineaApi(app) {
     router.get('/bookingdetails',
         async function (req, res, next) {
             try {
-                const data = await detailsController.getBookingdetails();
+                const data = await detailsController.getBookingDetails();
                 res.status(200).json({
                     data: data,
                     message: "Bookingdetails obtenidos con exito"
@@ -298,6 +298,20 @@ function AerolineaApi(app) {
         async function (req, res, next) {
             try {
                 const data = await seatController.getSeats();
+                res.status(200).json({
+                    data: data,
+                    message: "Seats obtenidos con exito"
+                });
+            } catch (error) {
+                next(error);
+            }
+        }
+    );
+
+    router.get('/seats/flight/:id',
+        async function (req, res, next) {
+            try {
+                const data = await seatController.getSeatsByFlight(req.params.id);
                 res.status(200).json({
                     data: data,
                     message: "Seats obtenidos con exito"
