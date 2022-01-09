@@ -4,7 +4,7 @@ class FlightController {
     constructor() {
         this.table = spanner.table('flight');
     }
-
+    
     async getFlights() {
         const query = {
             sql: 'SELECT * FROM flight',

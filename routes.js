@@ -3,11 +3,12 @@ const FlightController = require('./controllers/flight_controller');
 const PassengerController = require('./controllers/passenger_controller');
 const BookingController = require('./controllers/booking_controller');
 const BookingdetailsController = require('./controllers/bookingdetail_controller');
+const SeatController = require('./controllers/seat_controller');
 function AerolineaApi(app) {
     const router = express.Router();
     app.use('/', router);
     const flightController = new FlightController();
-    router.get('/flights', 
+    router.get('/flights',
         async function (req, res, next) {
             try {
                 const data = await flightController.getFlights();
@@ -291,6 +292,79 @@ function AerolineaApi(app) {
             }
         }   
     );
+
+    const seatController = new SeatController();
+    router.get('/seats',
+        async function (req, res, next) {
+            try {
+                const data = await seatController.getSeats();
+                res.status(200).json({
+                    data: data,
+                    message: "Seats obtenidos con exito"
+                });
+            } catch (error) {
+                next(error);
+            }
+        }
+    );
+
+    router.get('/seats/:id',
+        async function (req, res, next) {
+            try {
+                const data = await seatController.getSeat(req.params.id);
+                res.status(200).json({
+                    data: data,
+                    message: "Seat obtenido con exito"
+                });
+            } catch (error) {
+                next(error);
+            }
+        }
+    );
+
+    router.post('/seats',
+        async function (req, res, next) {
+            try {
+                const data = await seatController.createSeat(req.body);
+                res.status(200).json({
+                    data: data,
+                    message: "Seat creado con exito"
+                });
+            } catch (error) {
+                next(error);
+            }
+        }
+    );
+
+    router.put('/seats/:id',
+        async function (req, res, next) {
+            try {
+                const data = await seatController.updateSeat(req.body);
+                res.status(200).json({
+                    data: data,
+                    message: "Seat actualizado con exito"
+                });
+            } catch (error) {
+                next(error);
+            }
+        }
+    );
+
+    router.delete('/seats/:id',
+        async function (req, res, next) {
+            try {
+                const data = await seatController.deleteSeat(req.params.id);
+                res.status(200).json({
+                    data: data,
+                    message: "Seat eliminado con exito"
+                });
+            } catch (error) {
+                next(error);
+            }
+        }
+    );
+
+
 
     
 
