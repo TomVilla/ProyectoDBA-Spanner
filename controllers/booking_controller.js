@@ -59,6 +59,8 @@ class BookingController {
               const [rowCount] = await transaction.runUpdate({
                 sql: `DELETE FROM booking WHERE bookingid = ${id}`,
               });
+
+              return rowCount;
             } catch (err) {
               console.error('ERROR:', err);
             }
