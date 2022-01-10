@@ -207,10 +207,12 @@ function AerolineaApi(app) {
             }
         }
     );
+    const detailsController = new BookingdetailsController();
 
     router.delete('/bookings/:id',
         async function (req, res, next) {
             try {
+                await detailsController.deleteBookingDetail(req.params.id);
                 const data = await bookingController.deleteBooking(req.params.id);
                 res.status(200).json({
                     data: data,
@@ -222,7 +224,6 @@ function AerolineaApi(app) {
         }
     );
 
-    const detailsController = new BookingdetailsController();
     router.get('/bookingdetails',
         async function (req, res, next) {
             try {
@@ -282,7 +283,7 @@ function AerolineaApi(app) {
     router.delete('/bookingdetails/:id',
         async function (req, res, next) {
             try {
-                const data = await detailsController.deleteBookingdetail(req.params.id);
+                const data = await detailsController.deleteBookingDetail(req.params.id);
                 res.status(200).json({
                     data: data,
                     message: "Bookingdetail eliminado con exito"

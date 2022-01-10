@@ -7,7 +7,7 @@ class BookingController {
 
     async getBookings() {
         const query = {
-            sql: 'SELECT * FROM booking',
+            sql: 'SELECT * FROM booking INNER JOIN flight ON booking.flightid = flight.flightid INNER JOIN seat ON booking.seatid = seat.seatid',
         };
         try {
             const [rows] = await spanner.run(query);
@@ -50,6 +50,7 @@ class BookingController {
     }
 
     async deleteBooking(id) {
+        
         spanner.runTransaction(async (err, transaction) => {
             if (err) {
               console.error(err);
