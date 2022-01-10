@@ -69,7 +69,7 @@ class FlightController {
                 // accidentally deleting all rows in a table.
                 // https://cloud.google.com/spanner/docs/dml-syntax#where_clause
                 const [rowCount] = await transaction.runUpdate({
-                  sql: 'DELETE FROM flight WHERE true',
+                  sql: 'DELETE FROM flight WHERE flightid = ${id}',
                 });
                 console.log(`${rowCount} records deleted from flight.`);
                 await transaction.commit();

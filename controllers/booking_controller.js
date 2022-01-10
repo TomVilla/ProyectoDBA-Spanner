@@ -50,22 +50,54 @@ class BookingController {
     }
 
     async deleteBooking(id) {
-        
+       
         spanner.runTransaction(async (err, transaction) => {
             if (err) {
-              console.error(err);
-              return;
+                console.error(err);
+                return;
             }
             try {
-              const [rowCount] = await transaction.runUpdate({
-                sql: `DELETE FROM booking WHERE bookingid = ${id}`,
-              });
-
-              return rowCount;
+                const [rowCount] = await transaction.runUpdate({
+                    sql: `DELETE FROM bookingdetails WHERE bookingid=${id}`,
+                });
+                console.log(`Dato eliminado de booking details.`);
             } catch (err) {
-              console.error('ERROR:', err);
+                console.error('ERROR:', err);
             }
+            try {
+                const [rowCount] = await transaction.runUpdate({
+                    sql: `DELETE FROM booking WHERE bookingid=${id}`,
+                })
+                await transaction.commit();
+            } catch (err) {
+                console.error('ERROR:', err);
+            }
+            // if (err) {
+            //   console.error(err);
+            //   return;
+            // }
+            // try {
+            //   const [rowCount] = await transaction.runUpdate({
+            //     sql: `DELETE FROM booking WHERE bookingid = ${id}`,
+            //   });
+            //   console.log(`${rowCount} records deleted from booking.`);
+            // } catch (err) {
+            //   console.error('ERROR:', err);
+            // }
+            // try {
+            //     // The WHERE clause is required for DELETE statements to prevent
+            //     // accidentally deleting all rows in a table.
+            //     // https://cloud.google.com/spanner/docs/dml-syntax#where_clause
+            //     const [rowCount] = await transaction.runUpdate({
+            //       sql: `DELETE FROM booking WHERE bookingid = ${id}`,
+            //     });
+            //     console.log(`${rowCount} records deleted from booking.`);
+            //     await transaction.commit();
+            // } catch (err) {
+            //     console.error('ERROR:', err);
+            // }
           });
+
     }
 
     

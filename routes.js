@@ -212,7 +212,6 @@ function AerolineaApi(app) {
     router.delete('/bookings/:id',
         async function (req, res, next) {
             try {
-                await detailsController.deleteBookingDetail(req.params.id);
                 const data = await bookingController.deleteBooking(req.params.id);
                 res.status(200).json({
                     data: data,
@@ -278,20 +277,6 @@ function AerolineaApi(app) {
                 next(error);
             }
         }
-    );
-
-    router.delete('/bookingdetails/:id',
-        async function (req, res, next) {
-            try {
-                const data = await detailsController.deleteBookingDetail(req.params.id);
-                res.status(200).json({
-                    data: data,
-                    message: "Bookingdetail eliminado con exito"
-                });
-            } catch (error) {
-                next(error);
-            }
-        }   
     );
 
     const seatController = new SeatController();
