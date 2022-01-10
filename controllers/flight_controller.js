@@ -52,30 +52,26 @@ class FlightController {
 
     async deleteFlight(id) {
         spanner.runTransaction(async (err, transaction) => {
-            if (err) {
-              console.error(err);
-              return;
-            }
-            try {
-              const [rowCount] = await transaction.runUpdate({
-                sql: `DELETE FROM flight WHERE flightid = ${id}`,
-              });
-              console.log(`${rowCount} records deleted from flight.`);
-            } catch (err) {
-              console.error('ERROR:', err);
-            }
-            try {
-                // The WHERE clause is required for DELETE statements to prevent
-                // accidentally deleting all rows in a table.
-                // https://cloud.google.com/spanner/docs/dml-syntax#where_clause
-                const [rowCount] = await transaction.runUpdate({
-                  sql: 'DELETE FROM flight WHERE flightid = ${id}',
-                });
-                console.log(`${rowCount} records deleted from flight.`);
-                await transaction.commit();
-              } catch (err) {
-                console.error('ERROR:', err);
-              }
+          if (err) {
+            console.error(err);
+            return;
+          }
+          try {
+            const [rowCount] = await transaction.runUpdate({
+                sql: `DELETE FROM flight WHERE flightid=${id}`,
+            });
+            console.log(`Dato eliminado de fligth.`);
+          } catch (err) {
+            console.error('ERROR:', err);
+          }
+          try {
+            const [rowCount] = await transaction.runUpdate({
+                sql: `DELETE FROM booking WHERE flightgid=${id}`,
+            })
+            await transaction.commit();
+          } catch (err) {
+            console.error('ERROR:', err);
+          }
         });
     }
 
