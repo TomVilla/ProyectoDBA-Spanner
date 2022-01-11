@@ -56,6 +56,15 @@ class FlightController {
             console.error(err);
             return;
           }
+
+          try {
+            const [rowCount] = await transaction.runUpdate({
+                sql: `DELETE FROM seat WHERE flightid=${id}`,
+            });
+            console.log(`Dato eliminado de seat.`);
+          } catch (err) {
+            console.error('ERROR:', err);
+          }
           try {
             const [rowCount] = await transaction.runUpdate({
                 sql: `DELETE FROM flight WHERE flightid=${id}`,
