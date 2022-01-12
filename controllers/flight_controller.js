@@ -1,8 +1,12 @@
 const spanner = require('../spanner.js');
+const {Spanner} = require('@google-cloud/spanner');
+const SeatController = require('./seat_controller');
+
 class FlightController {
 
     constructor() {
         this.table = spanner.table('flight');
+        this.seatController = new SeatController();
     }
     
     async getFlights() {
@@ -35,6 +39,14 @@ class FlightController {
       flight.flightid = timestamp;
         try {
             this.table.insert([{flightid: flight.flightid, flightsource: flight.flightsource, flightdest: flight.flightdest, flightdate: flight.flightdate}]);
+            this.seatController.createSeat({seatid: timestamp + 1,
+              seatnumber: 1,
+              seatcost: Spanner.float(100),
+              flightid: timestamp});
+            this.seatController.createSeat({seatid: timestamp + 2,
+              seatnumber: 2,
+              seatcost: Spanner.float(200),
+              flightid: timestamp})
             return true;
         } catch (err) {
             console.error('ERROR:', err);
