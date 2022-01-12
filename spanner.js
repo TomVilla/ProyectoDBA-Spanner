@@ -3,7 +3,7 @@
     // Imports the Google Cloud client library
     const {Spanner} = require('@google-cloud/spanner');
 
-    const projectId = 'dotted-hook-331601'; //neon-mesh-332003, dotted-hook-331601
+    const projectId = 'neon-mesh-332003'; //neon-mesh-332003, dotted-hook-331601
     const instanceId = 'proyectodb';
     const databaseId = 'aerolinea';
     // Creates a client
