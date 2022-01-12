@@ -61,22 +61,31 @@ class FlightController {
             const [rowCount] = await transaction.runUpdate({
                 sql: `DELETE FROM seat WHERE flightid=${id}`,
             });
-            console.log(`Dato eliminado de seat.`);
+            console.log(`Dato eliminado de seat.` + rowCount);
+          } catch (err) {
+            console.error('ERROR:', err);
+          }
+          try{
+            const [rowCount] = await transaction.runUpdate({
+                sql: `DELETE FROM bookingdetails WHERE bookingid IN (SELECT bookingid FROM booking WHERE flightid=${id})`,
+            });
+            console.log(`Dato eliminado de bookingdetails.` + rowCount);
+          }catch(err){
+            console.error('ERROR:', err);
+          }
+          try {
+            const [rowCount] = await transaction.runUpdate({
+                sql: `DELETE FROM booking WHERE flightid=${id}`,
+            });
+            console.log(`Dato eliminado de booking.` + rowCount);
           } catch (err) {
             console.error('ERROR:', err);
           }
           try {
             const [rowCount] = await transaction.runUpdate({
                 sql: `DELETE FROM flight WHERE flightid=${id}`,
-            });
-            console.log(`Dato eliminado de fligth.`);
-          } catch (err) {
-            console.error('ERROR:', err);
-          }
-          try {
-            const [rowCount] = await transaction.runUpdate({
-                sql: `DELETE FROM booking WHERE flightgid=${id}`,
             })
+            console.log(`Dato eliminado de flight.` + rowCount);
             await transaction.commit();
           } catch (err) {
             console.error('ERROR:', err);

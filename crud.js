@@ -92,7 +92,7 @@ function randomFloat(min, max)
 }
 function randomSource()
 {
-    var choice = new Array("Guayaquil - ECU", "Quito - ECU");
+    var choice = new Array("Guayaquil - ECU", "Quito - ECU", "Lima - PER", "Bogotá - COL", "Berlín - ALEMANIA", "Madrid - ESPAÑA", "Barcelona - ESPAÑA", "Paris - FRANCIA", "Roma - ITALIA", "Londres - INGLATERRA", "Tokio - JAPON");
     var random = Math.random() * (choice.length);
     random = Math.floor(random);
     var word = choice[random];
