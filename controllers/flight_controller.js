@@ -34,7 +34,7 @@ class FlightController {
       var timestamp = d.getTime();
       flight.flightid = timestamp;
         try {
-            this.table.insert([{flightid: flight.flightid, flightsource: flight.flightsource, flightdest: flight.flightdest, flightdate: flight.flightdate}]);
+            await this.table.insert([{flightid: flight.flightid, flightsource: flight.flightsource, flightdest: flight.flightdest, flightdate: flight.flightdate}]);
             return true;
         } catch (err) {
             console.error('ERROR:', err);
@@ -44,7 +44,7 @@ class FlightController {
 
     async updateFlight(id, flight) {
         try{
-            this.table.update([{flightid: id, flightsource: flight.flightsource, flightdest: flight.flightdest, flightdate: flight.flightdate}]);
+            await this.table.update([{flightid: id, flightsource: flight.flightsource, flightdest: flight.flightdest, flightdate: flight.flightdate}]);
             return true;
         }
         catch(err){

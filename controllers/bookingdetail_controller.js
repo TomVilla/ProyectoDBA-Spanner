@@ -31,7 +31,7 @@ class BookingDetailsController {
 
     async createBookingDetail(bookingdetail) {
         try {
-            this.table.insert(bookingdetail);
+            await this.table.insert(bookingdetail);
             return true;
         } catch (err) {
             console.error('ERROR:', err);
@@ -39,15 +39,6 @@ class BookingDetailsController {
 
     }
 
-    async updateBookingDetail(bookingdetail) {
-        try{
-            this.table.update(bookingdetail);
-            return true;
-        }
-        catch(err){
-            console.error('ERROR:', err);
-        }
-    }
-
+    
 }
 module.exports = BookingDetailsController;

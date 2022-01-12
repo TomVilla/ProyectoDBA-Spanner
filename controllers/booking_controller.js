@@ -51,7 +51,7 @@ class BookingController {
 
     async updateBooking(id, booking) {
         try{
-            this.table.update([{bookingid: id, bookdate: booking.bookdate, flightid: booking.flightid, seatid: booking.seatid}]);
+            await this.table.update([{bookingid: id, bookdate: booking.bookdate, flightid: booking.flightid, seatid: booking.seatid}]);
             return true;
         }
         catch(err){

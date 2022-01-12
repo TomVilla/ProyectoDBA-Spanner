@@ -42,7 +42,7 @@ class SeatController{
 
     async createSeat(seat){
         try {
-            this.table.insert(seat);
+            await this.table.insert(seat);
             return true;
         } catch (err) {
             console.error('ERROR:', err);
@@ -52,7 +52,7 @@ class SeatController{
 
     async updateSeat(id, seat){
         try{
-            this.table.update([{seatid: id, seatnumber: seat.seatnumber, seatcost: seat.seatcost, flightid: seat.flightid}]);
+            await this.table.update([{seatid: id, seatnumber: seat.seatnumber, seatcost: seat.seatcost, flightid: seat.flightid}]);
             return true;
         }
         catch(err){

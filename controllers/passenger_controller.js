@@ -31,7 +31,7 @@ class PassengerController {
 
     async createPassenger(passenger) {
         try {
-            this.table.insert(passenger);
+            await this.table.insert(passenger);
             return true;
         } catch (err) {
             console.error('ERROR:', err);
@@ -41,7 +41,7 @@ class PassengerController {
 
     async updatePassenger(id, passenger) {
         try{
-            this.table.update([{passid: id, passname: passenger.passname, passemail: passenger.passemail, passdob: passenger.passdob}]);
+            await this.table.update([{passid: id, passname: passenger.passname, passemail: passenger.passemail, passdob: passenger.passdob}]);
             return true;
         }
         catch(err){
