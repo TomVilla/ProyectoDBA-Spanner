@@ -39,9 +39,9 @@ class PassengerController {
 
     }
 
-    async updatePassenger(passenger) {
+    async updatePassenger(id, passenger) {
         try{
-            this.table.update(passenger);
+            this.table.update([{passid: id, passname: passenger.passname, passemail: passenger.passemail, passdob: passenger.passdob}]);
             return true;
         }
         catch(err){

@@ -30,9 +30,11 @@ class FlightController {
     }
 
     async createFlight(flight) {
-        
+      var d = new Date();
+      var timestamp = d.getTime();
+      flight.flightid = timestamp;
         try {
-            this.table.insert(flight);
+            this.table.insert([{flightid: flight.flightid, flightsource: flight.flightsource, flightdest: flight.flightdest, flightdate: flight.flightdate}]);
             return true;
         } catch (err) {
             console.error('ERROR:', err);
@@ -40,9 +42,9 @@ class FlightController {
 
     }
 
-    async updateFlight(flight) {
+    async updateFlight(id, flight) {
         try{
-            this.table.update(flight);
+            this.table.update([{flightid: id, flightsource: flight.flightsource, flightdest: flight.flightdest, flightdate: flight.flightdate}]);
             return true;
         }
         catch(err){

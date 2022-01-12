@@ -50,9 +50,9 @@ class SeatController{
 
     }
 
-    async updateSeat(seat){
+    async updateSeat(id, seat){
         try{
-            this.table.update(seat);
+            this.table.update([{seatid: id, seatnumber: seat.seatnumber, seatcost: seat.seatcost, flightid: seat.flightid}]);
             return true;
         }
         catch(err){

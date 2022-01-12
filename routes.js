@@ -53,7 +53,7 @@ function AerolineaApi(app) {
     router.put('/flights/:id',
         async function (req, res, next) {
             try {
-                const data = await flightController.updateFlight(req.body);
+                const data = await flightController.updateFlight(req.params.id,req.body);
                 res.status(200).json({
                     data: data,
                     message: "Flight actualizada con exito"
@@ -126,7 +126,7 @@ function AerolineaApi(app) {
     router.put('/passengers/:id',
         async function (req, res, next) {
             try {
-                const data = await passengerController.updatePassenger(req.body);
+                const data = await passengerController.updatePassenger(req.params.id,req.body);
                 res.status(200).json({
                     data: data,
                     message: "Passenger actualizado con exito"
@@ -197,7 +197,7 @@ function AerolineaApi(app) {
     router.put('/bookings/:id',
         async function (req, res, next) {
             try {
-                const data = await bookingController.updateBooking(req.body);
+                const data = await bookingController.updateBooking(req.params.id,req.body);
                 res.status(200).json({
                     data: data,
                     message: "Booking actualizado con exito"
@@ -265,20 +265,6 @@ function AerolineaApi(app) {
         }
     );
 
-    router.put('/bookingdetails/:id',
-        async function (req, res, next) {
-            try {
-                const data = await detailsController.updateBookingdetail(req.body);
-                res.status(200).json({
-                    data: data,
-                    message: "Bookingdetail actualizado con exito"
-                });
-            } catch (error) {
-                next(error);
-            }
-        }
-    );
-
     const seatController = new SeatController();
     router.get('/seats',
         async function (req, res, next) {
@@ -339,7 +325,7 @@ function AerolineaApi(app) {
     router.put('/seats/:id',
         async function (req, res, next) {
             try {
-                const data = await seatController.updateSeat(req.body);
+                const data = await seatController.updateSeat(req.params.id, req.body);
                 res.status(200).json({
                     data: data,
                     message: "Seat actualizado con exito"
