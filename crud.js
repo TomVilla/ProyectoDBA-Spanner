@@ -92,7 +92,7 @@ function randomFloat(min, max)
 }
 function randomSource()
 {
-    var choice = new Array("Guayaquil - ECU", "Quito - ECU", "Lima - PER", "Bogotá - COL", "Berlín - ALEMANIA", "Madrid - ESPAÑA", "Barcelona - ESPAÑA", "Paris - FRANCIA", "Roma - ITALIA", "Londres - INGLATERRA", "Tokio - JAPON");
+    var choice = new Array("GYE", "UIO", "CUE", "BOG", "SLC", "MIA", "LFD", "TEX", "ROM", "LND", "TKO");
     var random = Math.random() * (choice.length);
     random = Math.floor(random);
     var word = choice[random];
@@ -100,7 +100,7 @@ function randomSource()
 }
 function randomDest()
 {
-    var choice = new Array("Salt Lake City - USA", "Provo - USA", "Madrid - ESPAÑA", "Barcelona - ESPAÑA", "Berlín - ALEMANIA");
+    var choice = new Array("TRV", "PRV", "MAD", "BAR", "BER");
     var random = Math.random() * (choice.length);
     random = Math.floor(random);
     var word = choice[random];

@@ -3,6 +3,7 @@ class BookingController {
 
     constructor() {
         this.table = spanner.table('booking');
+        this.tabledetails = spanner.table('bookingdetails');
     }
 
     async getBookings() {
@@ -30,12 +31,14 @@ class BookingController {
     }
 
     async createBooking(booking) {
-        try {
-            this.table.insert(booking);
-            return true;
-        } catch (err) {
-            console.error('ERROR:', err);
-        }
+            try{
+            await this.table.insert([{bookingid: booking.bookingid, bookdate: booking.bookdate, flightid: booking.flightid, seatid: booking.seatid}]);
+            await this.tabledetails.insert([{bookingid: booking.bookingid, passid: 1}]);
+            }catch(err){
+                console.error('ERROR:', err);
+            }
+         
+
 
     }
 
