@@ -31,12 +31,19 @@ class BookingController {
     }
 
     async createBooking(booking) {
-            try{
+        //obetener timestamp actual
+        var d = new Date();
+        var timestamp = d.getTime();
+        booking.bookingid = timestamp;
+        console.log(timestamp);
+        //obtener el ultimo id de la tabla booking
+        try{
             await this.table.insert([{bookingid: booking.bookingid, bookdate: booking.bookdate, flightid: booking.flightid, seatid: booking.seatid}]);
             await this.tabledetails.insert([{bookingid: booking.bookingid, passid: 1}]);
-            }catch(err){
-                console.error('ERROR:', err);
-            }
+            console.log(`Dato con id ${booking.bookingid} insertado en booking.`);
+        }catch(err){
+            console.error('ERROR:', err);
+        }
          
 
 
