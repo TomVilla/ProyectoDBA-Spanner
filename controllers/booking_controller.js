@@ -8,7 +8,7 @@ class BookingController {
 
     async getBookings() {
         const query = {
-            sql: 'SELECT * FROM booking INNER JOIN flight ON booking.flightid = flight.flightid INNER JOIN seat ON booking.seatid = seat.seatid',
+            sql: 'SELECT * FROM booking INNER JOIN flight ON booking.flightid = flight.flightid INNER JOIN seat ON booking.seatid = seat.seatid ORDER BY booking.bookingid DESC',
         };
         try {
             const [rows] = await spanner.run(query);

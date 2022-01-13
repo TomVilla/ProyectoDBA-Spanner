@@ -11,7 +11,7 @@ class FlightController {
     
     async getFlights() {
         const query = {
-            sql: 'SELECT * FROM flight',
+            sql: 'SELECT * FROM flight ORDER BY flightid DESC',
           };
           try {
             const [rows] = await spanner.run(query);
@@ -65,7 +65,9 @@ class FlightController {
     }
 
     async deleteFlight(id) {
-        spanner.runTransaction(async (err, transaction) => {
+      console.log('DELETE FLIGHT 1');
+      spanner.runTransaction(async (err, transaction) => {
+      console.log('DELETE FLIGHT 2');
           if (err) {
             console.error(err);
             return;
@@ -105,6 +107,8 @@ class FlightController {
             console.error('ERROR:', err);
           }
         });
+      console.log('DELETE FLIGHT 3');
+
     }
 
 
